@@ -39,3 +39,28 @@ public:
         return memo[i];
     }
 };
+//DP Bottom UP
+
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+
+        int n = nums.size();
+        if(n == 0) return 0;
+
+        vector<int> memo(n+1);
+
+        memo[0] =0;
+        memo[1] =nums[0];
+
+        for(int i =1;i<n;i++){
+
+            memo[i+1] = max(memo[i-1] + nums[i],memo[i]);
+        }
+
+        return memo[n];
+    }
+
+  
+};
+//DP BOttom Down
