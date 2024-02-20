@@ -5,7 +5,7 @@ public:
         int maxStart = 0;
         int maxLength = 1;
 
-        for(int i =0;i<s.size()-1;i++)
+        for(int i =0;i<s.size()-1;i++) //for(int i =0;i<s.size()-1;i++)
         {
             middleInOut(s,i,i,maxStart,maxLength);
             middleInOut(s,i,i+1,maxStart,maxLength);
