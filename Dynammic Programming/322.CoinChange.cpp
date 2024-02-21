@@ -1,3 +1,5 @@
+//Recursion
+
 class Solution {
 public:
     int dp[12 +1][10000 + 1];
@@ -32,5 +34,31 @@ public:
         int res = DP(coins,0,amount);
 
         return (res == INT_MAX-1) ? -1 : res ;
+    }
+};
+
+//DP 
+
+class Solution {
+public:
+    int coinChange(vector<int>& coins, int amount) {
+        
+        int dp[amount +1];
+        dp[0] = 0;
+
+        for(int i =1;i<=amount;i++){
+            dp[i] = 1e9;
+
+            for(auto c : coins){
+
+                if(i - c >=0){
+
+                    dp[i] = min(dp[i],dp[i-c]+1);
+                }
+            }
+        }
+
+        return dp[amount] == 1e9 ? -1 : dp[amount];
+       
     }
 };
