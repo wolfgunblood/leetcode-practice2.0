@@ -29,3 +29,26 @@ public:
         return maxi;
     }
 };
+
+//NeetCode Solution
+
+class Solution {
+public:
+    int maxProduct(vector<int>& nums) {
+
+       int res = nums[0];
+       int currMax =1;
+       int currMin =1;
+
+       for(int i=0;i<nums.size();i++){
+
+           int n = nums[i];
+           int temp = currMax*n;
+           currMax = max(currMax*n,max(currMin*n,n));
+           currMin = min(temp,min(currMin*n,n));
+           res = max(currMax,res);
+       }
+
+       return res;
+    }
+};
