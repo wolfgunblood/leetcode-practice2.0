@@ -24,3 +24,37 @@ public:
         }
     }
 };
+//BFS
+class Solution {
+public:
+
+    void dfs(vector<int>& nums,vector<vector<int>>& result,vector<int>& curr,vector<bool>& visited){
+
+        if(curr.size() == nums.size())
+        {
+            result.push_back(curr);
+            return ;
+        }
+        for(int i = 0;i<nums.size();i++){
+            
+            if(!visited[i]){
+                visited[i] = true;
+                curr.push_back(nums[i]);
+                dfs(nums,result,curr,visited);
+                visited[i] = false;
+                curr.pop_back();
+            }
+        }
+    }
+
+    vector<vector<int>> permute(vector<int>& nums) {
+        
+       vector<vector<int>> result;
+       vector<int> curr;
+       vector<bool> visited(nums.size(),false);
+
+       dfs(nums,result,curr,visited);
+
+       return result;
+    }
+};
