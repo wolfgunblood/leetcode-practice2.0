@@ -1,3 +1,4 @@
+//Memomization
 class Solution {
 public:
     int deleteAndEarn(vector<int>& nums) {
@@ -29,4 +30,32 @@ private:
         memo[i] = max(pick,notPick);
         return memo[i];
     }
+};
+
+//Tabulation Method
+
+class Solution {
+public:
+    int deleteAndEarn(vector<int>& nums) {
+    
+        int trans[10001] = {0};
+        int maxSum = 0;
+
+        for(auto num : nums){
+            trans[num] += num;
+            maxSum = max(maxSum,num);
+        }
+
+        vector<int> memo(maxSum + 1);
+
+        memo[0] = trans[0];
+        memo[1] = max(trans[1],trans[0]);
+
+        for(int i=2;i<=maxSum;i++){
+            memo[i] = max(trans[i]+memo[i-2],memo[i-1]);
+        }
+
+        return memo[maxSum];
+    }
+
 };
