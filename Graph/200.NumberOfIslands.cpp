@@ -84,3 +84,57 @@ public:
 
     }
 };
+
+//Modified and more detailed explained
+
+class Solution {
+public:
+    int numIslands(vector<vector<char>>& grid) {
+        int m = grid.size();
+        int n = grid[0].size();
+        vector<vector<bool>> vis(m,vector<bool>(n,false));
+
+        int island = 0;
+
+        for(int i=0;i<m;i++){
+            for(int j =0;j<n;j++){
+
+                if(grid[i][j] == '1' && !vis[i][j])
+                {
+                    dfs(grid,vis,i,j);
+                    island++;
+                }
+            }
+        }
+
+        return island;
+    }
+private:
+    void dfs(vector<vector<char>>& grid,vector<vector<bool>>& vis,int row, int col){
+
+        if(row<0 || row>=grid.size() || col<0 || col>=grid[0].size() || vis[row][col] || grid[row][col] != '1') return;
+
+        vis[row][col] = true;
+
+        int delRow[] = {-1,1,0,0};
+        int delCol[] = {0,0,-1,1};
+
+        for(int i =0;i<4;i++)
+        {
+            int dx = row + delRow[i]; 
+            int dy = col + delCol[i];
+
+            // if(dx>=0 && dx<grid.size() && dy>=0 && dy<grid[0].size() && !vis[dx][dy])
+                dfs(grid,vis,dx,dy);
+        }
+       
+    //    if(row-1>=0 && row-1<grid.size() && col>=0 && col<grid[0].size() && !vis[row-1][col])
+    //    dfs(grid,vis,row-1,col);
+    //    if(row+1>=0 && row+1<grid.size() && col>=0 && col<grid[0].size() && !vis[row+1][col])
+    //    dfs(grid,vis,row+1,col);
+    //    if(row>=0 && row<grid.size() && col-1>=0 && col-1<grid[0].size() && !vis[row][col-1])
+    //    dfs(grid,vis,row,col-1);
+    //    if(row>=0 && row<grid.size() && col+1>=0 && col+1<grid[0].size() && !vis[row][col+1])
+    //    dfs(grid,vis,row,col+1);
+    }
+};
